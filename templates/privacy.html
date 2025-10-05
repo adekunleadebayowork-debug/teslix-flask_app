@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Teslux</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-black shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <i data-feather="zap" class="text-blue-600"></i>
+                        <span class="text-2xl font-bold text-white">TESLIX</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                        <a href="{{url_for('home')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Home</a>
+                        <a href="{{url_for('about')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">About</a>
+                        <a href="{{url_for('products')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Products</a>
+                        {% if current_user.is_authenticated %}
+                            <a href="{{url_for('dashboard')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">My Account</a>
+                        {% else %}
+                            <a href="{{url_for('account')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">My Account</a>
+                        {% endif %}
+                        <a href="{{url_for('privacy')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Privacy & Policy</a>
+                        <a href="{{url_for('terms')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Terms and Conditions</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="{{url_for('home')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Home</a>
+            <a href="{{url_for('about')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">About</a>
+            <a href="{{url_for('products')}}" class="block px-3 py-2 rounded-md text-base font-medium text-blue-600 bg-blue-50">Products</a>
+            {% if current_user.is_authenticated %}
+                <a href="{{url_for('dashboard')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">My Account</a>
+            {% else %}
+                <a href="{{url_for('account')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">My Account</a>
+            {% endif %}
+            <a href="{{url_for('privacy')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Privacy & Policy</a>
+            <a href="{{url_for('terms')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Terms and Condition</a>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="border-b border-gray-200 pb-4 mb-6">
+                <h1 class="text-3xl font-bold text-gray-900">Privacy & Policy</h1>
+                <p class="text-gray-600 mt-2">Effective Date: June 12, 2025</p>
+                <p class="text-gray-600">Website: www.teslux.org</p>
+                <p class="text-gray-600">Company: Teslux Ltd.</p>
+            </div>
+
+            <div class="prose max-w-none">
+                <p class="mb-6">
+                    At Teslux, your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and protect your personal information when you visit or make a purchase from www.teslux.org (the "Site"). By using the Site, you agree to the terms outlined in this policy.
+                </p>
+
+                <h2 class="text-xl font-semibold mb-3 mt-6">1. Information We Collect</h2>
+                <p class="mb-4">
+                    We collect the following types of personal data:
+                </p>
+
+                <h3 class="font-semibold mb-2">1.1 Information You Provide</h3>
+                <ul class="list-disc pl-5 mb-4 space-y-1">
+                    <li><strong>Contact Details:</strong> Name, email address, phone number, and shipping/billing address.</li>
+                    <li><strong>Account Information:</strong> Username, password, and preferences.</li>
+                    <li><strong>Payment Information:</strong> While we do not store payment card details, we use secure third-party payment processors (e.g., Stripe, PayPal) to handle transactions.</li>
+                    <li><strong>Customer Support Data:</strong> Any correspondence or communication with Teslux support.</li>
+                </ul>
+
+                <h3 class="font-semibold mb-2">1.2 Information Collected Automatically</h3>
+                <ul class="list-disc pl-5 mb-6 space-y-1">
+                    <li><strong>Device Information:</strong> IP address, browser type, device type, operating system.</li>
+                    <li><strong>Usage Data:</strong> Pages viewed, time spent on pages, links clicked, referring URL.</li>
+                    <li><strong>Cookies and Tracking Technologies:</strong> We use cookies and similar tools for site functionality, performance tracking, and marketing.</li>
+                </ul>
+                <p class="mb-6 italic">For more details, see our Cookie Policy.</p>
+
+                <h2 class="text-xl font-semibold mb-3">2. How We Use Your Information</h2>
+                <p class="mb-4">
+                    We use the information we collect to:
+                </p>
+                <ul class="list-disc pl-5 mb-6 space-y-1">
+                    <li>Process and fulfill orders.</li>
+                    <li>Communicate with you (order updates, promotions, account notifications).</li>
+                    <li>Improve our website and user experience.</li>
+                    <li>Prevent fraud and enhance security.</li>
+                    <li>Comply with legal obligations and resolve disputes.</li>
+                </ul>
+
+                <h2 class="text-xl font-semibold mb-3">3. Legal Basis for Processing (for EU/UK users)</h2>
+                <p class="mb-4">
+                    Under the GDPR, we rely on the following legal grounds:
+                </p>
+                <ul class="list-disc pl-5 mb-6 space-y-1">
+                    <li><strong>Contractual Necessity:</strong> To fulfill orders and provide customer service.</li>
+                    <li><strong>Consent:</strong> For sending promotional emails or using non-essential cookies.</li>
+                    <li><strong>Legitimate Interests:</strong> To improve our services, ensure security, and conduct analytics.</li>
+                    <li><strong>Legal Obligation:</strong> Where required by law or court order.</li>
+                </ul>
+
+                <h2 class="text-xl font-semibold mb-3">4. Sharing Your Information</h2>
+                <p class="mb-4">
+                    We do not sell your personal information. We may share your data with:
+                </p>
+                <ul class="list-disc pl-5 mb-6 space-y-1">
+                    <li><strong>Service Providers:</strong> Payment gateways, shipping partners, email providers, and analytics services.</li>
+                    <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets.</li>
+                    <li><strong>Legal Authorities:</strong> If required by law or to protect our rights, users, or others.</li>
+                </ul>
+                <p class="mb-6">
+                    All third-party partners are required to handle your data securely and in accordance with applicable laws.
+                </p>
+
+                <h2 class="text-xl font-semibold mb-3">5. International Data Transfers</h2>
+                <p class="mb-6">
+                    If you are located outside the UK, your data may be transferred to and processed in countries that may not provide the same level of data protection. In such cases, we implement appropriate safeguards, including standard contractual clauses.
+                </p>
+
+                <h2 class="text-xl font-semibold mb-3">6. Data Retention</h2>
+                <p class="mb-4">
+                    We retain personal information for as long as necessary to:
+                </p>
+                <ul class="list-disc pl-5 mb-6 space-y-1">
+                    <li>Fulfill the purposes for which it was collected.</li>
+                    <li>Comply with legal, tax, or accounting obligations.</li>
+                    <li>Resolve disputes and enforce our agreements.</li>
+                </ul>
+                <p class="mb-6">
+                    Typically, we retain account and transaction data for up to 7 years, unless otherwise required by law.
+                </p>
+
+                <h2 class="text-xl font-semibold mb-3">7. Your Rights</h2>
+                <p class="mb-4">
+                    Depending on your location, you may have the following rights:
+                </p>
+                <ul class="list-disc pl-5 mb-6 space-y-1">
+                    <li>Access your personal data.</li>
+                    <li>Correct inaccurate or incomplete information.</li>
+                    <li>Delete your data ("right to be forgotten").</li>
+                    <li>Restrict or object to processing.</li>
+                    <li>Withdraw consent at any time (e.g., for marketing emails).</li>
+                    <li>Data portability.</li>
+                </ul>
+                <p class="mb-6">
+                    To exercise your rights, email us at privacy@teslix.org. We may need to verify your identity before processing requests.
+                </p>
+
+                <h2 class="text-xl font-semibold mb-3">8. Security Measures</h2>
+                <p class="mb-6">
+                    We implement appropriate technical and organizational measures to protect your data from unauthorized access, disclosure, or misuse. However, no method of transmission over the Internet is 100% secure. You are responsible for keeping your account credentials confidential.
+                </p>
+
+                <h2 class="text-xl font-semibold mb-3">9. Third-Party Services</h2>
+                <p class="mb-6">
+                    Teslux.org may contain links to external websites and services. We are not responsible for the privacy practices of those third parties. Please review their policies before sharing personal information.
+                </p>
+
+                <h2 class="text-xl font-semibold mb-3">10. Children's Privacy</h2>
+                <p class="mb-6">
+                    Our website and services are not intended for children under the age of 16. We do not knowingly collect personal data from minors. If we become aware that a child has provided us with personal information, we will delete it promptly.
+                </p>
+
+                <h2 class="text-xl font-semibold mb-3">11. Changes to This Policy</h2>
+                <p class="mb-6">
+                    We may update this Privacy Policy periodically. Any changes will be posted on this page with the updated effective date. We encourage you to review the policy regularly to stay informed.
+                </p>
+
+                <h2 class="text-xl font-semibold mb-3">12. Contact Us</h2>
+                <p class="mb-2">
+                    If you have questions about this Privacy Policy or how we handle your personal information, contact us at:
+                </p>
+                <div class="bg-gray-50 p-4 rounded-md mt-4">
+                    <p class="flex items-center"><i data-feather="map-pin" class="mr-2 w-4 h-4"></i> Teslux Ltd.</p>
+                    <p class="flex items-center mt-2"><i data-feather="map-pin" class="mr-2 w-4 h-4 opacity-0"></i> 221B Baker Street, London, UK</p>
+                    <p class="flex items-center mt-2"><i data-feather="mail" class="mr-2 w-4 h-4"></i> Email: privacy@teslix.org</p>
+                    <p class="flex items-center mt-2"><i data-feather="phone" class="mr-2 w-4 h-4"></i> Phone: +44 20 7946 0123</p>
+                    <p class="flex items-center mt-2"><i data-feather="globe" class="mr-2 w-4 h-4"></i> Website: www.teslux.org</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        feather.replace();
+    </script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Teslix</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+        }
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 1.5rem;
+            top: 3rem;
+            height: calc(100% - 3rem);
+            width: 2px;
+            background: #e5e7eb;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+     <!-- Navigation -->
+    <nav class="bg-black shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <i data-feather="zap" class="text-blue-600"></i>
+                        <span class="text-2xl font-bold text-white">TESLIX</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                        <a href="{{url_for('home')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Home</a>
+                        <a href="{{url_for('about')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">About</a>
+                        <a href="{{url_for('products')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Products</a>
+                        {% if current_user.is_authenticated %}
+                            <a href="{{url_for('dashboard')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">My Account</a>
+                        {% else %}
+                            <a href="{{url_for('account')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">My Account</a>
+                        {% endif %}
+                        <a href="{{url_for('privacy')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Privacy & Policy</a>
+                        <a href="{{url_for('terms')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Terms and Conditions</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="{{url_for('home')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Home</a>
+            <a href="{{url_for('about')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">About</a>
+            <a href="{{url_for('products')}}" class="block px-3 py-2 rounded-md text-base font-medium text-blue-600 bg-blue-50">Products</a>
+            {% if current_user.is_authenticated %}
+                <a href="{{url_for('dashboard')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">My Account</a>
+            {% else %}
+                <a href="{{url_for('account')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">My Account</a>
+            {% endif %}
+            <a href="{{url_for('privacy')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Privacy & Policy</a>
+            <a href="{{url_for('terms')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Terms and Condition</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-black py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <br>
+            <div class="text-center" data-aos="fade-up">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">About Teslix</h1>
+                <p class="text-xl md:text-2xl max-w-3xl mx-auto">We're revolutionizing the future with innovative technology solutions that make a difference.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="py-20 bg-white text-grey">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-black text-3xl font-bold mb-6">Our Story</h2>
+                    <p class="text-gray-600 mb-6">Founded in 2015, Teslix began as a small team of engineers passionate about sustainable energy solutions. Today, we've grown into a global leader in clean technology innovation.</p>
+                    <p class="text-gray-600 mb-8">Our mission is to accelerate the world's transition to sustainable energy through cutting-edge technology and thoughtful design.</p>
+                    <button class="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition">Learn More</button>
+                </div>
+                <div data-aos="fade-left" class="relative">
+                    <img src="http://static.photos/technology/1024x576/42" alt="Our Team" class="rounded-lg shadow-xl w-full">
+                    <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-lg w-3/4">
+                        <h3 class="font-bold text-black text-lg mb-2">Innovation at Scale</h3>
+                        <p class="text-gray-600 text-sm">Delivering solutions to over 50 countries worldwide</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="py-20 bg-gray-50 text-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-black text-3xl font-bold mb-4">Our Core Values</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">These principles guide everything we do at Teslix</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                        <i data-feather="compass" class="text-blue-600"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3">Innovation</h3>
+                    <p class="text-gray-600">We challenge conventional thinking and push boundaries to create breakthrough technologies.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                        <i data-feather="globe" class="text-green-600"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3">Sustainability</h3>
+                    <p class="text-gray-600">Our solutions are designed with the planet in mind, reducing environmental impact at every step.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-6">
+                        <i data-feather="users" class="text-purple-600"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3">People First</h3>
+                    <p class="text-gray-600">We believe technology should serve humanity, not the other way around.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="py-20 bg-white text-grey">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4 text-black">Our Journey</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Key milestones in our company's history</p>
+            </div>
+            <div class="space-y-8 relative">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item pl-12 relative" data-aos="fade-right">
+                    <div class="absolute left-0 w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
+                        <i data-feather="zap" class="text-white"></i>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-xl">Company Founded</h3>
+                            <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">2015</span>
+                        </div>
+                        <p class="text-gray-600">Teslix was founded by a team of engineers in a small garage with a vision to revolutionize energy technology.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item pl-12 relative" data-aos="fade-right" data-aos-delay="100">
+                    <div class="absolute left-0 w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
+                        <i data-feather="award" class="text-white"></i>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-xl">First Product Launch</h3>
+                            <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">2017</span>
+                        </div>
+                        <p class="text-gray-600">Our first commercial product, the T-100 energy module, received industry recognition for its innovative design.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item pl-12 relative" data-aos="fade-right" data-aos-delay="200">
+                    <div class="absolute left-0 w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
+                        <i data-feather="globe" class="text-white"></i>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-xl">Global Expansion</h3>
+                            <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">2019</span>
+                        </div>
+                        <p class="text-gray-600">Opened offices in Europe and Asia, establishing Teslix as a truly global technology company.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 4 -->
+                <div class="timeline-item pl-12 relative" data-aos="fade-right" data-aos-delay="300">
+                    <div class="absolute left-0 w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
+                        <i data-feather="bar-chart-2" class="text-white"></i>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-xl">IPO & Growth</h3>
+                            <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">2021</span>
+                        </div>
+                        <p class="text-gray-600">Successfully went public and expanded our product line to serve commercial and industrial markets.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+<!--    <section class="py-20 bg-gray-50">-->
+<!--        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">-->
+<!--            <div class="text-center mb-16" data-aos="fade-up">-->
+<!--                <h2 class="text-3xl font-bold mb-4">Meet Our Leadership</h2>-->
+<!--                <p class="text-gray-600 max-w-2xl mx-auto">The brilliant minds driving our vision forward</p>-->
+<!--            </div>-->
+<!--            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">-->
+<!--                &lt;!&ndash; Team Member 1 &ndash;&gt;-->
+<!--                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition" data-aos="fade-up" data-aos-delay="100">-->
+<!--                    <img src="http://static.photos/people/640x360/101" alt="Alex Johnson" class="w-full h-64 object-cover">-->
+<!--                    <div class="p-6">-->
+<!--                        <h3 class="font-bold text-xl mb-1">Alex Johnson</h3>-->
+<!--                        <p class="text-blue-600 mb-3">CEO & Founder</p>-->
+<!--                        <p class="text-gray-600 text-sm">Visionary leader with 15+ years in clean tech innovation.</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Team Member 2 &ndash;&gt;-->
+<!--                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition" data-aos="fade-up" data-aos-delay="200">-->
+<!--                    <img src="http://static.photos/people/640x360/102" alt="Maria Chen" class="w-full h-64 object-cover">-->
+<!--                    <div class="p-6">-->
+<!--                        <h3 class="font-bold text-xl mb-1">Maria Chen</h3>-->
+<!--                        <p class="text-blue-600 mb-3">CTO</p>-->
+<!--                        <p class="text-gray-600 text-sm">Engineering expert specializing in energy systems.</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Team Member 3 &ndash;&gt;-->
+<!--                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition" data-aos="fade-up" data-aos-delay="300">-->
+<!--                    <img src="http://static.photos/people/640x360/103" alt="James Wilson" class="w-full h-64 object-cover">-->
+<!--                    <div class="p-6">-->
+<!--                        <h3 class="font-bold text-xl mb-1">James Wilson</h3>-->
+<!--                        <p class="text-blue-600 mb-3">CFO</p>-->
+<!--                        <p class="text-gray-600 text-sm">Financial strategist with global market expertise.</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Team Member 4 &ndash;&gt;-->
+<!--                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition" data-aos="fade-up" data-aos-delay="400">-->
+<!--                    <img src="http://static.photos/people/640x360/104" alt="Sarah Davis" class="w-full h-64 object-cover">-->
+<!--                    <div class="p-6">-->
+<!--                        <h3 class="font-bold text-xl mb-1">Sarah Davis</h3>-->
+<!--                        <p class="text-blue-600 mb-3">VP of Product</p>-->
+<!--                        <p class="text-gray-600 text-sm">User-centered design and product development leader.</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+    <!-- CTA -->
+    <section class="py-20 bg-blue-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">Join Our Mission</h2>
+            <p class="text-xl max-w-3xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="100">We're always looking for talented individuals who share our passion for innovation and sustainability.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
+                <button class="bg-white text-blue-600 px-6 py-3 rounded-md hover:bg-gray-100 transition font-medium">View Open Positions</button>
+                <button class="border-2 border-white px-6 py-3 rounded-md hover:bg-blue-700 transition font-medium">Contact Us</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Teslix</h3>
+                    <p class="text-gray-400">Innovating for a sustainable future.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">News</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Products</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Energy Solutions</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Storage Systems</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Software</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>© 2023 Teslix Technologies. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Initialize AOS and Feather Icons
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            feather.replace();
+        });
+    </script>
+</body>
+</html>

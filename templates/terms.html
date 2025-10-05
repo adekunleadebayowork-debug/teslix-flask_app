@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions | Teslux</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-black shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <i data-feather="zap" class="text-blue-600"></i>
+                        <span class="text-2xl font-bold text-white">TESLIX</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                        <a href="{{url_for('home')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Home</a>
+                        <a href="{{url_for('about')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">About</a>
+                        <a href="{{url_for('products')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Products</a>
+                        {% if current_user.is_authenticated %}
+                            <a href="{{url_for('dashboard')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">My Account</a>
+                        {% else %}
+                            <a href="{{url_for('account')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">My Account</a>
+                        {% endif %}
+                        <a href="{{url_for('privacy')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Privacy & Policy</a>
+                        <a href="{{url_for('terms')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Terms and Conditions</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="{{url_for('home')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Home</a>
+            <a href="{{url_for('about')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">About</a>
+            <a href="{{url_for('products')}}" class="block px-3 py-2 rounded-md text-base font-medium text-blue-600 bg-blue-50">Products</a>
+            {% if current_user.is_authenticated %}
+                <a href="{{url_for('dashboard')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">My Account</a>
+            {% else %}
+                <a href="{{url_for('account')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">My Account</a>
+            {% endif %}
+            <a href="{{url_for('privacy')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Privacy & Policy</a>
+            <a href="{{url_for('terms')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Terms and Condition</a>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="border-b border-gray-200 pb-4 mb-6">
+                <h1 class="text-3xl font-bold text-gray-900">Terms & Conditions</h1>
+<!--                <p class="text-gray-600 mt-2">Effective Date: June 12, 2025</p>-->
+                <p class="text-gray-600">Welcome to Teslux. These Terms and Conditions (“Terms”) govern your use of our website and services. By accessing or using our website (www.teslux.org), you agree to be bound by these Terms. Please read them carefully. If you do not agree with these Terms, you must not use our services or website.</p>
+            </div>
+
+            <div class="prose max-w-none">
+<!--                <p class="mb-6">-->
+<!--                    At Teslux, your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and protect your personal information when you visit or make a purchase from www.teslux.org (the "Site"). By using the Site, you agree to the terms outlined in this policy.-->
+<!--                </p>-->
+
+                <h2 class="text-xl font-semibold mb-3 mt-6">1. About Teslux</h2>
+<!--                <p class="mb-4">-->
+<!--                    We collect the following types of personal data:-->
+<!--                </p>-->
+
+<!--                <h3 class="font-semibold mb-2">1. About Teslux</h3>-->
+                <p class="text-gray-600">Teslux is an online platform specializing in the listing, stock, and sale of advanced technology products and mobile vehicles, including electric cars, e-scooters, drones, and other smart mobility solutions. We aim to offer a streamlined and transparent purchase experience for individuals and businesses.</p>
+<!--                <ul class="list-disc pl-5 mb-4 space-y-1">-->
+<!--                    <li><strong>Contact Details:</strong> Name, email address, phone number, and shipping/billing address.</li>-->
+<!--                    <li><strong>Account Information:</strong> Username, password, and preferences.</li>-->
+<!--                    <li><strong>Payment Information:</strong> While we do not store payment card details, we use secure third-party payment processors (e.g., Stripe, PayPal) to handle transactions.</li>-->
+<!--                    <li><strong>Customer Support Data:</strong> Any correspondence or communication with Teslux support.</li>-->
+<!--                </ul>-->
+
+<!--                <h3 class="font-semibold mb-2">2. Eligibility</h3>-->
+                <h2 class="text-xl font-semibold mb-3 mt-6">2. Eligibility</h2>
+                <p class="text-gray-600">To use our website and services, you must:</p>
+                <ul class="list-disc pl-5 mb-6 space-y-1">
+                    <li>Be at least 18 years old.</li>
+                    <li>Have the legal capacity to enter into binding contracts.</li>
+                    <li>Provide accurate, current, and complete information during registration or purchase.</li>
+                </ul>
+                <p class="text-gray-600">We reserve the right to deny access or services to any user at our discretion.</p>
+
+
+                <h2 class="text-xl font-semibold mb-3">3. Account Registration</h2>
+
+                <p class="mb-4">
+                    To make purchases or track orders, you may create a Teslux account. You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account.
+                    If you suspect unauthorized access to your account, contact us immediately at support@teslux.org.
+                </p>
+<!--                <ul class="list-disc pl-5 mb-6 space-y-1">-->
+<!--                    <li>Process and fulfill orders.</li>-->
+<!--                    <li>Communicate with you (order updates, promotions, account notifications).</li>-->
+<!--                    <li>Improve our website and user experience.</li>-->
+<!--                    <li>Prevent fraud and enhance security.</li>-->
+<!--                    <li>Comply with legal obligations and resolve disputes.</li>-->
+<!--                </ul>-->
+
+                <h2 class="text-xl font-semibold mb-3">5. Ordering and Payments</h2>
+                <h3 class="font-semibold mb-2">5.1 Order Process</h3>
+                <p class="mb-4">
+                    Placing an order on Teslux constitutes an offer to purchase the selected product(s). After you place your order, we will send you an email confirming receipt of your order. This confirmation does not guarantee acceptance.
+                    Orders are only accepted once we have verified payment and product availability.
+                </p>
+
+                <h3 class="font-semibold mb-2">5.2 Payment Methods</h3>
+                <p class="text-gray-600">We accept the following payment methods:</p>
+                <ul class="list-disc pl-5 mb-6 space-y-1">
+                    <li>Major credit and debit cards (Visa, MasterCard, American Express)</li>
+                    <li>PayPal</li>
+                    <li>Bank Transfer</li>
+                    <li>Cryptocurrency (Selected options)</li>
+                </ul>
+
+                <h2 class="text-xl font-semibold mb-3">6. Shipping and Delivery</h2>
+<!--                <p class="mb-4">-->
+<!--                    We do not sell your personal information. We may share your data with:-->
+<!--                </p>-->
+                <ul class="list-disc pl-5 mb-6 space-y-1">
+                    <li><strong>Shipping Area:</strong> We currently ship to most countries worldwide.</li>
+                    <li><strong>Shipping Time:</strong> Estimated delivery times vary by product and destination and are displayed at checkout.</li>
+                    <li><strong>Tracking:</strong> A tracking number will be provided once your order is dispatched.</li>
+                    <li><strong>Risk of Loss:</strong> Risk transfers to you once the product is delivered.</li>
+                </ul>
+                <p class="mb-6">
+                    All third-party partners are required to handle your data securely and in accordance with applicable laws.
+                </p>
+
+                <h2 class="text-xl font-semibold mb-3">7. Returns and Refunds</h2>
+                <h3 class="font-semibold mb-2">7.1 Return Policy</h3>
+                <p class="mb-6">You may return eligible items within 14 days of delivery, provided the product is unused, in its original packaging, and with all accessories included.</p>
+
+                <h3 class="font-semibold mb-2">7.2 Non-Returnable Items</h3>
+                <p class="mb-6">The following items are not eligible for return:</p>
+                <ul class="list-disc pl-5 mb-6 space-y-1">
+                    <li>Customized or special-order products</li>
+                    <li>Downloadable software</li>
+                    <li>Items damaged due to misuse</li>
+                </ul>
+
+                <h3 class="font-semibold mb-2">7.3 Refunds</h3>
+                <p class="mb-4">
+                    Refunds will be processed within 7–10 business days after receiving and inspecting the returned item. Refunds are issued via the original payment method.
+                    For full return instructions, visit: www.teslux.org/returns
+                </p>
+
+
+                <h2 class="text-xl font-semibold mb-3">8. Warranty and Repairs</h2>
+                <p class="mb-4">
+                    Many of our products come with a manufacturer’s warranty. Teslux does not provide an additional warranty unless explicitly stated.
+                </p>
+                <p class="mb-4">
+                    For warranty claims:
+                </p>
+                <ul class="list-disc pl-5 mb-6 space-y-1">
+                    <li>Contact us with proof of purchase and a description of the issue.</li>
+                    <li>We may assist in coordinating with the manufacturer or refer you directly.</li>
+                </ul>
+<!--                <p class="mb-6">-->
+<!--                    Typically, we retain account and transaction data for up to 7 years, unless otherwise required by law.-->
+<!--                </p>-->
+
+                <h2 class="text-xl font-semibold mb-3">9. User Conduct</h2>
+                <p class="mb-4">
+                    You agree not to:
+                </p>
+                <ul class="list-disc pl-5 mb-6 space-y-1">
+                    <li>Use our site for fraudulent or unlawful purposes.</li>
+                    <li>Interfere with the functionality or security of the website.</li>
+                    <li>Upload or transmit harmful content or code.</li>
+                    <li>Attempt to access accounts or systems not intended for you.</li>
+                </ul>
+                <p class="mb-6">
+                    Violation of these rules may result in account termination or legal action.
+                </p>
+
+                <h2 class="text-xl font-semibold mb-3">10. Intellectual Property</h2>
+                <p class="mb-6">
+                    All content on the Teslux website—including text, graphics, logos, images, videos, and software—is the property of Teslux or its licensors and is protected under applicable intellectual property laws.
+                    You may not reproduce, modify, distribute, or use our content without prior written consent.
+                </p>
+
+                <h2 class="text-xl font-semibold mb-3">11. Third-Party Links</h2>
+                <p class="mb-6">
+                    Our website may include links to third-party websites or services. Teslux is not responsible for the content, privacy policies, or practices of any third-party websites.
+                </p>
+
+
+                <h2 class="text-xl font-semibold mb-3">12. Limitation of Liability</h2>
+                <p class="mb-6">
+                    To the maximum extent permitted by law:
+                </p>
+                <ul class="list-disc pl-5 mb-6 space-y-1">
+                    <li>Teslux shall not be liable for any indirect, incidental, or consequential damages.</li>
+                    <li>Our total liability in connection with any product or service shall not exceed the purchase price of that product or service.</li>
+                </ul>
+
+                <h2 class="text-xl font-semibold mb-3">13. Indemnification</h2>
+                <p class="mb-6">
+                    You agree to indemnify and hold harmless Teslux, its affiliates, employees, and agents from any claims, liabilities, damages, and expenses arising from your use of the website or breach of these Terms.
+                </p>
+
+                <h2 class="text-xl font-semibold mb-3">14. Privacy Policy</h2>
+                <p class="mb-2">
+                    Our Privacy Policy explains how we collect, use, and protect your data. By using our website, you agree to our Privacy Policy.
+                </p>
+
+                <h2 class="text-xl font-semibold mb-3">15. Changes to These Terms</h2>
+                <p class="mb-2">
+                    Teslux may update these Terms from time to time. We will notify users of significant changes through the website or by email. Continued use of the website after changes indicates your acceptance.
+                </p>
+
+                <h2 class="text-xl font-semibold mb-3">16. Governing Law</h2>
+                <p class="mb-2">
+                    These Terms are governed by and interpreted in accordance with the laws of the United Kingdom. Any disputes will be subject to the exclusive jurisdiction of the courts in London, UK.
+                </p>
+
+                <h2 class="text-xl font-semibold mb-3">17. Contact Information</h2>
+                <p class="mb-2">
+                    For any questions regarding these Terms, please contact us at:
+                </p>
+
+                <div class="bg-gray-50 p-4 rounded-md mt-4">
+                    <p class="flex items-center"><i data-feather="map-pin" class="mr-2 w-4 h-4"></i> Teslux Ltd.</p>
+                    <p class="flex items-center mt-2"><i data-feather="map-pin" class="mr-2 w-4 h-4 opacity-0"></i> 221B Baker Street, London, UK</p>
+                    <p class="flex items-center mt-2"><i data-feather="mail" class="mr-2 w-4 h-4"></i> Email: privacy@teslix.org</p>
+                    <p class="flex items-center mt-2"><i data-feather="phone" class="mr-2 w-4 h-4"></i> Phone: +44 20 7946 0123</p>
+                    <p class="flex items-center mt-2"><i data-feather="globe" class="mr-2 w-4 h-4"></i> Website: www.teslux.org</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include "footer.html" %}
+
+    <script>
+         // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        feather.replace();
+    </script>
+</body>
+</html>

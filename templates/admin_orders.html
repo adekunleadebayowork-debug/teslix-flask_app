@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Update Ordera</title>
+</head>
+<body>
+    <table class="table-auto w-full border">
+  <thead>
+    <tr class="bg-gray-200">
+      <th>Order ID</th>
+      <th>User</th>
+      <th>Total</th>
+      <th>Status</th>
+      <th>Payment Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in orders %}
+      <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.user.username }}</td>
+        <td>${{ order.total_price }}</td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.payments[0].status if order.payments else "No Payment" }}</td>
+        <td>
+          <form method="POST" action="{{ url_for('update_order', order_id=order.id) }}">
+            <select name="status" class="border px-2 py-1 rounded">
+              <option value="Pending" {% if order.status == "Pending" %}selected{% endif %}>Pending</option>
+              <option value="Successful" {% if order.status == "Successful" %}selected{% endif %}>Successful</option>
+              <option value="Delivered" {% if order.status == "Delivered" %}selected{% endif %}>Delivered</option>
+            </select>
+            <button type="submit" class="ml-2 bg-blue-600 text-white px-3 py-1 rounded">
+              Update
+            </button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</body>
+</html>

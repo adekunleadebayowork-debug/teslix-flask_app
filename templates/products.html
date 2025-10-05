@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Teslix</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+        }
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-black shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <i data-feather="zap" class="text-blue-600"></i>
+                        <span class="text-2xl font-bold text-white">TESLIX</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                        <a href="{{url_for('home')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Home</a>
+                        <a href="{{url_for('about')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">About</a>
+                        <a href="{{url_for('products')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Products</a>
+                        {% if current_user.is_authenticated %}
+                            <a href="{{url_for('dashboard')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">My Account</a>
+                        {% else %}
+                            <a href="{{url_for('account')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">My Account</a>
+                        {% endif %}
+                        <a href="{{url_for('privacy')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Privacy & Policy</a>
+                        <a href="{{url_for('terms')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Terms and Conditions</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="{{url_for('home')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Home</a>
+            <a href="{{url_for('about')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">About</a>
+            <a href="{{url_for('products')}}" class="block px-3 py-2 rounded-md text-base font-medium text-blue-600 bg-blue-50">Products</a>
+            {% if current_user.is_authenticated %}
+                <a href="{{url_for('dashboard')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">My Account</a>
+            {% else %}
+                <a href="{{url_for('account')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">My Account</a>
+            {% endif %}
+            <a href="{{url_for('privacy')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Privacy & Policy</a>
+            <a href="{{url_for('terms')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Terms and Condition</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center" data-aos="fade-up">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Our Products</h1>
+                <p class="text-xl md:text-2xl max-w-3xl mx-auto">Discover our innovative lineup of electric vehicles and sustainable technology solutions</p>
+            </div>
+        </div>
+    </section>
+
+<!--    &lt;!&ndash; Products Filter &ndash;&gt;-->
+<!--    <section class="py-12 bg-white">-->
+<!--        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">-->
+<!--            <div class="flex flex-wrap justify-center gap-4 mb-12" data-aos="fade-up">-->
+<!--                <button class="px-6 py-3 bg-blue-600 text-white rounded-md font-medium">All Products</button>-->
+<!--                <button class="px-6 py-3 border border-gray-300 rounded-md hover:bg-gray-50 transition">Electric Vehicles</button>-->
+<!--                <button class="px-6 py-3 border border-gray-300 rounded-md hover:bg-gray-50 transition">Energy Solutions</button>-->
+<!--                <button class="px-6 py-3 border border-gray-300 rounded-md hover:bg-gray-50 transition">Software</button>-->
+<!--                <button class="px-6 py-3 border border-gray-300 rounded-md hover:bg-gray-50 transition">Services</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+    <!-- Featured Products -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">Featured Electric Vehicles</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Experience the future of driving with our cutting-edge EV lineup</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                {% for product in products %}
+                <div class="product-card bg-white rounded-xl overflow-hidden shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                    <a href="{{ url_for('product_detail', product_id=product.id) }}">
+                        <img src="{{product.image_url}}" alt="CyberTruck" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2">{{product.name}}</h3>
+                    </a>
+                         <div class="flex text-yellow-400">
+                            <i data-feather="star" class="w-5 h-5 fill-current"></i>
+                            <i data-feather="star" class="w-5 h-5 fill-current"></i>
+                            <i data-feather="star" class="w-5 h-5 fill-current"></i>
+                            <i data-feather="star" class="w-5 h-5 fill-current"></i>
+                            <i data-feather="star" class="w-5 h-5 fill-current"></i>
+                        </div>
+                        <p class="text-blue-600 text-lg font-semibold mb-3">${{ "%.2f"|format(product.price) }}</p>
+<!--                        <p class="text-gray-600 mb-4">Luxury performance sedan with up to 405 miles range and 0-60 in 1.99s</p>-->
+                        <div class="flex items-center justify-between">
+<!--                            <span class="text-sm text-gray-500">Add  cart</span>-->
+                            <form method="POST" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+                                <button class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition text-sm">
+                                    Add to Cart
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+<!--                &lt;!&ndash; Product 2 &ndash;&gt;-->
+<!--                <div class="product-card bg-white rounded-xl overflow-hidden shadow-sm" data-aos="fade-up" data-aos-delay="200">-->
+<!--                    <img src="http://static.photos/automotive/640x360/202" alt="Model 3" class="w-full h-64 object-cover">-->
+<!--                    <div class="p-6">-->
+<!--                        <h3 class="font-bold text-xl mb-2">Model 3</h3>-->
+<!--                        <p class="text-blue-600 text-lg font-semibold mb-3">From $42,990</p>-->
+<!--                        <p class="text-gray-600 mb-4">Compact premium sedan with up to 358 miles range and autopilot standard</p>-->
+<!--                        <div class="flex items-center justify-between">-->
+<!--                            <span class="text-sm text-gray-500">Available Now</span>-->
+<!--                            <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition text-sm">-->
+<!--                                Learn More-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Product 3 &ndash;&gt;-->
+<!--                <div class="product-card bg-white rounded-xl overflow-hidden shadow-sm" data-aos="fade-up" data-aos-delay="300">-->
+<!--                    <img src="http://static.photos/automotive/640x360/203" alt="Model X" class="w-full h-64 object-cover">-->
+<!--                    <div class="p-6">-->
+<!--                        <h3 class="font-bold text-xl mb-2">Model X</h3>-->
+<!--                        <p class="text-blue-600 text-lg font-semibold mb-3">From $99,990</p>-->
+<!--                        <p class="text-gray-600 mb-4">Premium SUV with falcon wing doors, up to 348 miles range and 6-seat configuration</p>-->
+<!--                        <div class="flex items-center justify-between">-->
+<!--                            <span class="text-sm text-gray-500">Available Now</span>-->
+<!--                            <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition text-sm">-->
+<!--                                Learn More-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Product 4 &ndash;&gt;-->
+<!--                <div class="product-card bg-white rounded-xl overflow-hidden shadow-sm" data-aos="fade-up" data-aos-delay="400">-->
+<!--                    <img src="http://static.photos/automotive/640x360/204" alt="Model Y" class="w-full h-64 object-cover">-->
+<!--                    <div class="p-6">-->
+<!--                        <h3 class="font-bold text-xl mb-2">Model Y</h3>-->
+<!--                        <p class="text-blue-600 text-lg font-semibold mb-3">From $47,990</p>-->
+<!--                        <p class="text-gray-600 mb-4">Compact SUV with up to 330 miles range and versatile cargo space</p>-->
+<!--                        <div class="flex items-center justify-between">-->
+<!--                            <span class="text-sm text-gray-500">Available Now</span>-->
+<!--                            <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition text-sm">-->
+<!--                                Learn More-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Product 5 &ndash;&gt;-->
+<!--                <div class="product-card bg-white rounded-xl overflow-hidden shadow-sm" data-aos="fade-up" data-aos-delay="500">-->
+<!--                    <img src="http://static.photos/automotive/640x360/205" alt="Cybertruck" class="w-full h-64 object-cover">-->
+<!--                    <div class="p-6">-->
+<!--                        <h3 class="font-bold text-xl mb-2">Cybertruck</h3>-->
+<!--                        <p class="text-blue-600 text-lg font-semibold mb-3">From $79,990</p>-->
+<!--                        <p class="text-gray-600 mb-4">Ultra-strong exoskeleton with up to 500 miles range and 14,000 lbs towing capacity</p>-->
+<!--                        <div class="flex items-center justify-between">-->
+<!--                            <span class="text-sm text-yellow-600">Coming Soon</span>-->
+<!--                            <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition text-sm">-->
+<!--                                Reserve Now-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Product 6 &ndash;&gt;-->
+<!--                <div class="product-card bg-white rounded-xl overflow-hidden shadow-sm" data-aos="fade-up" data-aos-delay="600">-->
+<!--                    <img src="http://static.photos/automotive/640x360/206" alt="Roadster" class="w-full h-64 object-cover">-->
+<!--                    <div class="p-6">-->
+<!--                        <h3 class="font-bold text-xl mb-2">Roadster</h3>-->
+<!--                        <p class="text-blue-600 text-lg font-semibold mb-3">From $200,000</p>-->
+<!--                        <p class="text-gray-600 mb-4">The quickest car in the world with 620+ miles range and 1.9s 0-60 mph</p>-->
+<!--                        <div class="flex items-center justify-between">-->
+<!--                            <span class="text-sm text-yellow-600">Coming 2024</span>-->
+<!--                            <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition text-sm">-->
+<!--                                Reserve Now-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+<!--    &lt;!&ndash; Energy Products &ndash;&gt;-->
+<!--    <section class="py-20 bg-white">-->
+<!--        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">-->
+<!--            <div class="text-center mb-16" data-aos="fade-up">-->
+<!--                <h2 class="text-3xl font-bold mb-4">Energy Solutions</h2>-->
+<!--                <p class="text-gray-600 max-w-2xl mx-auto">Power your home and business with sustainable energy technology</p>-->
+<!--            </div>-->
+
+<!--            <div class="grid md:grid-cols-2 gap-12 items-center">-->
+<!--                <div data-aos="fade-right">-->
+<!--                    <img src="http://static.photos/technology/640x360/301" alt="Powerwall" class="rounded-lg shadow-xl w-full">-->
+<!--                </div>-->
+<!--                <div data-aos="fade-left">-->
+<!--                    <h3 class="text-2xl font-bold mb-4">Powerwall</h3>-->
+<!--                    <p class="text-gray-600 mb-6">A compact home battery that stores solar energy for backup protection and energy independence.</p>-->
+<!--                    <ul class="space-y-3 text-gray-600 mb-8">-->
+<!--                        <li class="flex items-center">-->
+<!--                            <i data-feather="check-circle" class="text-green-500 mr-2"></i>-->
+<!--                            <span>13.5 kWh usable capacity</span>-->
+<!--                        </li>-->
+<!--                        <li class="flex items-center">-->
+<!--                            <i data-feather="check-circle" class="text-green-500 mr-2"></i>-->
+<!--                            <span>Seamless backup power</span>-->
+<!--                        </li>-->
+<!--                        <li class="flex items-center">-->
+<!--                            <i data-feather="check-circle" class="text-green-500 mr-2"></i>-->
+<!--                            <span>10-year warranty</span>-->
+<!--                        </li>-->
+<!--                        <li class="flex items-center">-->
+<!--                            <i data-feather="check-circle" class="text-green-500 mr-2"></i>-->
+<!--                            <span>Storm Watch active monitoring</span>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                    <div class="flex items-center gap-4">-->
+<!--                        <button class="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition font-medium">-->
+<!--                            Order Now-->
+<!--                        </button>-->
+<!--                        <span class="text-xl font-semibold text-blue-600">$11,500</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+<!--    &lt;!&ndash; Solar Products &ndash;&gt;-->
+<!--    <section class="py-20 bg-gray-50">-->
+<!--        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">-->
+<!--            <div class="grid md:grid-cols-2 gap-12 items-center">-->
+<!--                <div data-aos="fade-right">-->
+<!--                    <h3 class="text-2xl font-bold mb-4">Solar Roof</h3>-->
+<!--                    <p class="text-gray-600 mb-6">Transform your roof and produce clean energy with beautiful solar tiles that can power your home for decades.</p>-->
+<!--                    <ul class="space-y-3 text-gray-600 mb-8">-->
+<!--                        <li class="flex items-center">-->
+<!--                            <i data-feather="check-circle" class="text-green-500 mr-2"></i>-->
+<!--                            <span>Durable tempered glass tiles</span>-->
+<!--                        </li>-->
+<!--                        <li class="flex items-center">-->
+<!--                            <i data-feather="check-circle" class="text-green-500 mr-2"></i>-->
+<!--                            <span>25-year tile warranty</span>-->
+<!--                        </li>-->
+<!--                        <li class="flex items-center">-->
+<!--                            <i data-feather="check-circle" class="text-green-500 mr-2"></i>-->
+<!--                            <span>Weatherization and hail protection</span>-->
+<!--                        </li>-->
+<!--                        <li class="flex items-center">-->
+<!--                            <i data-feather="check-circle" class="text-green-500 mr-2"></i>-->
+<!--                            <span>Integrated Powerwall compatibility</span>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                    <button class="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition font-medium">-->
+<!--                        Get Quote-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--                <div data-aos="fade-left">-->
+<!--                    <img src="http://static.photos/construction/640x360/302" alt="Solar Roof" class="rounded-lg shadow-xl w-full">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+<!--    &lt;!&ndash; Software Section &ndash;&gt;-->
+<!--    <section class="py-20 bg-white">-->
+<!--        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">-->
+<!--            <div class="text-center mb-16" data-aos="fade-up">-->
+<!--                <h2 class="text-3xl font-bold mb-4">Software & Services</h2>-->
+<!--                <p class="text-gray-600 max-w-2xl mx-auto">Intelligent software solutions that enhance your driving experience</p>-->
+<!--            </div>-->
+
+<!--            <div class="grid md:grid-cols-3 gap-8">-->
+<!--                <div class="text-center" data-aos="fade-up" data-aos-delay="100">-->
+<!--                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">-->
+<!--                        <i data-feather="cpu" class="text-blue-600"></i>-->
+<!--                    </div>-->
+<!--                    <h3 class="font-bold text-xl mb-3">Autopilot</h3>-->
+<!--                    <p class="text-gray-600">Advanced driver assistance features for enhanced safety and convenience on the road.</p>-->
+<!--                </div>-->
+
+<!--                <div class="text-center" data-aos="fade-up" data-aos-delay="200">-->
+<!--                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">-->
+<!--                        <i data-feather="wifi" class="text-green-600"></i>-->
+<!--                    </div>-->
+<!--                    <h3 class="font-bold text-xl mb-3">Premium Connectivity</h3>-->
+<!--                    <p class="text-gray-600">Stay connected with satellite maps, live traffic visualization, and streaming media.</p>-->
+<!--                </div>-->
+
+<!--                <div class="text-center" data-aos="fade-up" data-aos-delay="300">-->
+<!--                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">-->
+<!--                        <i data-feather="tool" class="text-purple-600"></i>-->
+<!--                    </div>-->
+<!--                    <h3 class="font-bold text-xl mb-3">Service Plans</h3>-->
+<!--                    <p class="text-gray-600">Comprehensive maintenance and support packages to keep your vehicle in optimal condition.</p>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-blue-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">Ready to Experience the Future?</h2>
+            <p class="text-xl max-w-3xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="100">Schedule a test drive or get a personalized quote for any of our products</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
+                <button class="bg-white text-blue-600 px-8 py-4 rounded-md hover:bg-gray-100 transition font-medium text-lg">
+                    Schedule Test Drive
+                </button>
+                <button class="border-2 border-white px-8 py-4 rounded-md hover:bg-blue-700 transition font-medium text-lg">
+                    Get Quote
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Teslix</h3>
+                    <p class="text-gray-400">Innovating for a sustainable future.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">News</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Products</h3>
+                    <ul class="space-y-2">
+                        <li><a href="products.html" class="text-gray-400 hover:text-white">Electric Vehicles</a></li>
+                        <li><a href="products.html" class="text-gray-400 hover:text-white">Energy Solutions</a></li>
+                        <li><a href="products.html" class="text-gray-400 hover:text-white">Software</a></li>
+                        <li><a href="products.html" class="text-gray-400 hover:text-white">Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>© 2023 Teslix Technologies. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Initialize AOS and Feather Icons
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            feather.replace();
+        });
+    </script>
+</body>
+</html>

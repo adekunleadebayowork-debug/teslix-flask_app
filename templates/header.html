@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teslix - Electric Innovation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+    <style>
+        .hero-bg {
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 100%);
+        }
+        .nav-link:hover {
+            color: #e11d48;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #e11d48 0%, #7e22ce 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(225, 29, 72, 0.3);
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-100">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-black bg-opacity-90 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold text-white">TESLIX</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Home</a>
+                        <a href="{{url_for('about')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">About</a>
+                        <a href="{{url_for('product')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Products</a>
+                        <a href="{{url_for('account')}}" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">My Account</a>
+                        <a href="#" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Privacy & Policy</a>
+                        <a href="#" class="nav-link px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Terms and Conditions</a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <button class="btn-primary px-6 py-2 rounded-full text-sm font-medium text-white">
+                        Order Now
+                    </button>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-300 hover:text-white focus:outline-none">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+         Mobile Menu
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Home</a>
+            <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-blue-600 bg-blue-50">About</a>
+            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Services</a>
+            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Contact</a>
+            <button class="w-full mt-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Get Started</button>
+        </div>
+    </div>
+</body>
+</html>

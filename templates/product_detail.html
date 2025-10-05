@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{product.name}}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        <!-- Product Image Gallery -->
+        <div class="lg:grid lg:grid-cols-2 lg:gap-8">
+            <div class="mb-8 lg:mb-0">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="{{product.image_url}}" alt="{{product.name}}" class="w-full h-auto">
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">{{product.name}}</h1>
+                <div class="flex items-center mb-4">
+                    <div class="flex text-yellow-400">
+                        <i data-feather="star" class="w-5 h-5 fill-current"></i>
+                        <i data-feather="star" class="w-5 h-5 fill-current"></i>
+                        <i data-feather="star" class="w-5 h-5 fill-current"></i>
+                        <i data-feather="star" class="w-5 h-5 fill-current"></i>
+                        <i data-feather="star" class="w-5 h-5 fill-current"></i>
+                    </div>
+                    <span class="text-gray-600 ml-2">(42 reviews)</span>
+                </div>
+
+                <div class="mb-6">
+                    <span class="text-4xl font-bold text-gray-900">${{ "%.2f"|format(product.price) }}</span>
+                    <span class="text-lg text-gray-500 ml-1">USD</span>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-2">Description</h3>
+                    <p class="text-gray-700">
+                        {{product.description}}
+                    </p>
+                </div>
+
+<!--                <div class="mb-6">-->
+<!--                    <h3 class="text-lg font-semibold mb-2">Key Features</h3>-->
+<!--                    <ul class="list-disc pl-5 text-gray-700 space-y-1">-->
+<!--                        <li>0-60 mph in 2.9 seconds</li>-->
+<!--                        <li>500+ mile range</li>-->
+<!--                        <li>Tri Motor All-Wheel Drive</li>-->
+<!--                        <li>Ultra-hard 30X cold-rolled stainless steel</li>-->
+<!--                        <li>Armored glass</li>-->
+<!--                        <li>6-seat capacity</li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="flex items-center border border-gray-300 rounded">
+                        <button class="px-3 py-1 text-xl">-</button>
+                        <span class="px-4 py-1">1</span>
+                        <button class="px-3 py-1 text-xl">+</button>
+                    </div>
+                    <form method="POST" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+                        <button class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded transition duration-200">
+                            Add to Cart
+                        </button>
+                    </form>
+                </div>
+
+                <div class="border-t border-gray-200 pt-4">
+                    <div class="flex items-center text-gray-600">
+                        <i data-feather="truck" class="w-5 h-5 mr-2"></i>
+                        <span>Free delivery on all orders</span>
+                    </div>
+                    <div class="flex items-center text-gray-600 mt-2">
+                        <i data-feather="shield" class="w-5 h-5 mr-2"></i>
+                        <span>2-year warranty included</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!--        &lt;!&ndash; Reviews Section &ndash;&gt;-->
+<!--        <div class="mt-16 bg-white p-6 rounded-lg shadow-md">-->
+<!--            <h2 class="text-2xl font-bold mb-6">Customer Reviews</h2>-->
+
+<!--            <div class="space-y-6">-->
+<!--                <div class="border-b border-gray-200 pb-6">-->
+<!--                    <div class="flex items-center mb-2">-->
+<!--                        <div class="flex text-yellow-400">-->
+<!--                            <i data-feather="star" class="w-5 h-5 fill-current"></i>-->
+<!--                            <i data-feather="star" class="w-5 h-5 fill-current"></i>-->
+<!--                            <i data-feather="star" class="w-5 h-5 fill-current"></i>-->
+<!--                            <i data-feather="star" class="w-5 h-5 fill-current"></i>-->
+<!--                            <i data-feather="star" class="w-5 h-5 fill-current"></i>-->
+<!--                        </div>-->
+<!--                        <span class="ml-2 font-semibold">Amazing Truck!</span>-->
+<!--                    </div>-->
+<!--                    <p class="text-gray-700 mb-2">By John D. on October 12, 2023</p>-->
+<!--                    <p class="text-gray-700">-->
+<!--                        This truck is absolutely incredible. The acceleration is mind-blowing for a vehicle this size,-->
+<!--                        and the futuristic design turns heads everywhere I go. The stainless steel body is as tough as advertised.-->
+<!--                    </p>-->
+<!--                </div>-->
+
+<!--                <div class="border-b border-gray-200 pb-6">-->
+<!--                    <div class="flex items-center mb-2">-->
+<!--                        <div class="flex text-yellow-400">-->
+<!--                            <i data-feather="star" class="w-5 h-5 fill-current"></i>-->
+<!--                            <i data-feather="star" class="w-5 h-5 fill-current"></i>-->
+<!--                            <i data-feather="star" class="w-5 h-5 fill-current"></i>-->
+<!--                            <i data-feather="star" class="w-5 h-5 fill-current"></i>-->
+<!--                            <i data-feather="star" class="w-5 h-5"></i>-->
+<!--                        </div>-->
+<!--                        <span class="ml-2 font-semibold">Future is here</span>-->
+<!--                    </div>-->
+<!--                    <p class="text-gray-700 mb-2">By Sarah M. on September 28, 2023</p>-->
+<!--                    <p class="text-gray-700">-->
+<!--                        Driving this feels like being in a sci-fi movie. The interior is spacious and minimalist.-->
+<!--                        Only complaint is the large turning radius, but that's expected with such a massive vehicle.-->
+<!--                    </p>-->
+<!--                </div>-->
+
+<!--                <div class="pt-4">-->
+<!--                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-200">-->
+<!--                        Write a Review-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

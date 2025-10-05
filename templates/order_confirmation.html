@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation | Teslix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-2xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        <div class="bg-white p-8 rounded-lg shadow-md text-center">
+            <div class="mb-6 text-green-500">
+                <i data-feather="check-circle" class="w-16 h-16 mx-auto"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-4">Order Confirmed!</h1>
+            <p class="text-gray-700 mb-6">Thank you for your purchase. Your order has been received and is being processed.</p>
+
+            <div class="bg-gray-50 p-6 rounded-md mb-8 text-left">
+                <h2 class="text-lg font-semibold mb-4">Order Details</h2>
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Order Number</span>
+                        <span class="font-medium">##TSX-00{{ order.id }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Date</span>
+                        <span class="font-medium"><script>document.write(new Date().toLocaleDateString())</script></span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Product</span>
+                        {% for item in order_items %}
+                            <span class="font-medium">{{item.product.name}}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Total</span>
+                        <span class="font-bold">${{ order.total_price }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Payment Method</span>
+                        <span class="font-medium">Cryptocurrency(ETH)</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-gray-700 mb-6">We've sent a confirmation email with your order details. You'll receive another email when your order ships.</p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="{{url_for('products')}}" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded transition duration-200">
+                    Continue Shopping
+                </a>
+                <a href="{{url_for('dashboard')}}" class="bg-undefined-500 hover:bg-undefined-600 text-white font-bold py-3 px-6 rounded transition duration-200">
+                    View Order Status
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

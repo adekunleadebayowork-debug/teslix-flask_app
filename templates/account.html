@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teslix - Streaming Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        .auth-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                        url('http://static.photos/technology/1200x630/42');
+            background-size: cover;
+            background-position: center;
+        }
+        .input-field {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<body class="min-h-screen auth-bg text-white">
+    <div class="container mx-auto px-4 py-16">
+        <div class="flex justify-center">
+            <div class="w-full max-w-md">
+                <!-- Logo -->
+                <div class="flex justify-center mb-10">
+                    <div class="text-4xl font-bold tracking-tighter">
+                        <span class="text-red-500">TESL</span><span class="text-white">IX</span>
+                    </div>
+                </div>
+
+                <!-- Auth Tabs -->
+                <div class="flex mb-8 border-b border-gray-700">
+                    <button id="login-tab" class="flex-1 py-3 font-medium text-center border-b-2 border-red-500 text-red-500">LOGIN</button>
+                    <button id="register-tab" class="flex-1 py-3 font-medium text-center text-gray-400 hover:text-white">REGISTER</button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="login-form">
+                    <form class="space-y-6" method="post" action="{{url_for('account')}}">
+                        {{ login_form.hidden_tag() }}
+                        <div>
+                            {{ login_form.email.label(class="block text-sm font-medium mb-2") }}
+                            <div class="relative">
+                                <i data-feather="mail" class="absolute left-3 top-3 text-gray-400"></i>
+                                {{ login_form.email(id="email", class="w-full py-3 pl-10 pr-4 rounded-md input-field border border-gray-600 focus:border-red-500 focus:outline-none", placeholder="your@email.com") }}
+                            </div>
+                        </div>
+                        <div>
+                            {{ login_form.password.label(class="block text-sm font-medium mb-2") }}
+                            <div class="relative">
+                                <i data-feather="lock" class="absolute left-3 top-3 text-gray-400"></i>
+                                {{ login_form.password(id="password", class="w-full py-3 pl-10 pr-4 rounded-md input-field border border-gray-600 focus:border-red-500 focus:outline-none", placeholder="Enter your password") }}
+                                <button type="button" onclick="togglePassword()"
+                                    class="absolute inset-y-0 right-3 flex items-center text-gray-500">
+                                    👁
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                {{ login_form.remember_me(class="rounded bg-gray-800 border-gray-600 text-red-500 focus:ring-red-500") }}
+                                {{ login_form.remember_me.label(class="ml-2 text-sm") }}
+                            </div>
+                            <a href="#" class="text-sm text-red-500 hover:underline">Forgot password?</a>
+                        </div>
+                        {{ login_form.submit_login(class="w-full py-3 px-4 bg-red-600 hover:bg-red-700 rounded-md font-medium transition duration-200") }}
+                    </form>
+                    <div class="mt-6 text-center text-sm">
+                        <p>Don't have an account? <a href="#" id="switch-to-register" class="text-red-500 hover:underline">Register now</a></p>
+                    </div>
+                </div>
+
+                <!-- Register Form (Hidden by default) -->
+                <div id="register-form" class="hidden">
+                    <form class="space-y-6" method="post" action="{{url_for('account')}}">
+                        {{ register_form.hidden_tag() }}
+                        <div>
+                            {{ register_form.username.label(class="block text-sm font-medium mb-2") }}
+                            <div class="relative">
+                                {{ register_form.username(id="username", class="w-full py-3 pl-10 pr-4 rounded-md input-field border border-gray-600 focus:border-red-500 focus:outline-none", placeholder="username") }}
+                            </div>
+                        </div>
+                        <div>
+                            {{ register_form.email.label(class="block text-sm font-medium mb-2") }}
+                            <div class="relative">
+                                <i data-feather="mail" class="absolute left-3 top-3 text-gray-400"></i>
+                                {{ register_form.email(id="email", class="w-full py-3 pl-10 pr-4 rounded-md input-field border border-gray-600 focus:border-red-500 focus:outline-none", placeholder="your@email.com") }}
+                            </div>
+                        </div>
+                        <div>
+                            {{ register_form.password.label(class="block text-sm font-medium mb-2") }}
+                            <div class="relative">
+                                <i data-feather="lock" class="absolute left-3 top-3 text-gray-400"></i>
+                                {{ register_form.password(id="password", class="w-full py-3 pl-10 pr-4 rounded-md input-field border border-gray-600 focus:border-red-500 focus:outline-none", placeholder="••••••••") }}
+                                <button type="button" onclick="togglePassword()"
+                                    class="absolute inset-y-0 right-3 flex items-center text-gray-500">
+                                    👁
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            {{ register_form.confirm_password.label(class="block text-sm font-medium mb-2") }}
+                            <div class="relative">
+                                <i data-feather="lock" class="absolute left-3 top-3 text-gray-400"></i>
+                                {{ register_form.confirm_password(id="confirm password", class="w-full py-3 pl-10 pr-4 rounded-md input-field border border-gray-600 focus:border-red-500 focus:outline-none", placeholder="••••••••") }}
+                                <button type="button" onclick="togglePassword()"
+                                    class="absolute inset-y-0 right-3 flex items-center text-gray-500">
+                                    👁
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            {{ register_form.agree_terms(class="rounded bg-gray-800 border-gray-600 text-red-500 focus:ring-red-500") }}
+                            {{ register_form.agree_terms.label(class="ml-2 text-sm") }}
+                        </div>
+                        {{ register_form.submit_register(class="w-full py-3 px-4 bg-red-600 hover:bg-red-700 rounded-md font-medium transition duration-200") }}
+                    </form>
+                    <div class="mt-6 text-center text-sm">
+                        <p>Already have an account? <a href="{{url_for('account')}}" id="switch-to-login" class="text-red-500 hover:underline">Login here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize AOS and Feather Icons
+        AOS.init();
+        feather.replace();
+
+        function togglePassword() {
+            const pwd = document.getElementById("password");
+            if (pwd.type === "password") {
+              pwd.type = "text";
+            } else {
+              pwd.type = "password";
+            }
+        }
+
+        // Tab switching functionality
+        document.getElementById('login-tab').addEventListener('click', function() {
+            document.getElementById('login-tab').classList.add('border-red-500', 'text-red-500');
+            document.getElementById('register-tab').classList.remove('border-red-500', 'text-red-500');
+            document.getElementById('register-tab').classList.add('text-gray-400');
+            document.getElementById('login-form').classList.remove('hidden');
+            document.getElementById('register-form').classList.add('hidden');
+        });
+
+        document.getElementById('register-tab').addEventListener('click', function() {
+            document.getElementById('register-tab').classList.add('border-red-500', 'text-red-500');
+            document.getElementById('login-tab').classList.remove('border-red-500', 'text-red-500');
+            document.getElementById('login-tab').classList.add('text-gray-400');
+            document.getElementById('register-form').classList.remove('hidden');
+            document.getElementById('login-form').classList.add('hidden');
+        });
+
+        // Form switching links
+        document.getElementById('switch-to-register').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('register-tab').click();
+        });
+
+        document.getElementById('switch-to-login').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('login-tab').click();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teslix - Your Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        .cart-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .checkout-btn:hover {
+            background-position: right center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <i data-feather="battery-charging" class="text-red-500"></i>
+                        <span class="ml-2 text-xl font-bold text-gray-900">TESLIX</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="{{url_for('products')}}" class="text-gray-700 hover:text-gray-900 px-3 py-2">Shop</a>
+                    <a href="{{url_for('dashboard')}}" class="text-gray-700 hover:text-gray-900 px-3 py-2"> My Account</a>
+                    <a href="cart.html" class="relative text-gray-700 hover:text-gray-900 px-3 py-2">
+                        <i data-feather="shopping-cart"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{{total_items}}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Cart Items -->
+            <div class="md:w-2/3">
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-900">Your Cart ({{total_items}} items)</h2>
+                    </div>
+
+                    <!-- Cart Item 1 -->
+                    {% for item in cart_items %}
+                    <div class="cart-item transition-all duration-300 px-6 py-4 border-b border-gray-200" data-aos="fade-up">
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <div class="w-full sm:w-1/4">
+                                <img src="{{item.product.image_url}}" alt="Tesla Model S" class="rounded-lg w-full h-auto object-cover">
+                            </div>
+                            <div class="w-full sm:w-3/4">
+                                <div class="flex justify-between">
+                                    <h3 class="text-lg font-medium text-gray-900">{{item.product.name}}</h3>
+                                    <p class="text-lg font-semibold text-gray-900">${{item.product.price}}</p>
+                                </div>
+<!--                                <p class="text-gray-500 mt-1">Plaid • Red Multi-Coat • 21" Arachnid Wheels</p>-->
+                                <div class="flex items-center mt-4 space-x-4">
+                                    <div class="flex items-center border border-gray-300 rounded-md">
+                                        <button class="px-3 py-1 text-gray-600 hover:bg-gray-100">-</button>
+                                        <span class="px-3 py-1">1</span>
+                                        <button class="px-3 py-1 text-gray-600 hover:bg-gray-100">+</button>
+                                    </div>
+                                    <a href="{{ url_for('remove_from_cart', item_id=item.id) }}">
+                                        <button class="text-red-500 hover:text-red-700 flex items-center">
+                                            <i data-feather="trash-2" class="w-4 h-4 mr-1"></i>
+                                            <span>Remove</span>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    {% endfor %}
+
+
+            <!-- Order Summary -->
+            <div class="md:w-1/3" data-aos="fade-left">
+                <div class="bg-white rounded-xl shadow-sm p-6 sticky top-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Order Summary</h3>
+
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">total</span>
+                            <span class="font-medium">${{total}}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Shipping</span>
+                            <span class="font-medium">$0.00</span>
+                        </div>
+                        <div class="border-t border-gray-200 pt-3 mt-3">
+                            <div class="flex justify-between">
+                                <span class="text-lg font-semibold">Total</span>
+                                <span class="text-lg font-bold">${{total}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="{{url_for('checkout')}}">
+                        <button class="checkout-btn mt-6 w-full bg-gradient-to-r from-red-500 to-red-600 text-white py-3 px-4 rounded-md font-medium hover:from-red-600 hover:to-red-700 transition-all duration-500 bg-size-200 hover:bg-right-bottom">
+                            Proceed to Checkout
+                        </button>
+                    </a>
+
+                    <div class="mt-4 flex items-center">
+                        <i data-feather="lock" class="text-gray-400 mr-2"></i>
+                        <span class="text-sm text-gray-500">Secure checkout</span>
+                    </div>
+
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <h4 class="text-sm font-medium text-gray-900 mb-2">Need help?</h4>
+                        <p class="text-sm text-gray-500">Contact our customer support at <a href="mailto:support@teslix.com" class="text-red-500 hover:underline">support@teslix.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        feather.replace();
+    </script>
+</body>
+</html>

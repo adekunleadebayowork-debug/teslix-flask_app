@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add_product</title>
+</head>
+<body>
+  <form method="POST" action="{{ url_for('add_product') }}">
+    <input type="text" name="name" placeholder="Product Name" required>
+    <input type="number" name="price" placeholder="Price" step="0.01" required>
+    <textarea name="description" placeholder="Description"></textarea>
+    <input type="text" name="image_url" placeholder="Image URL">
+    <input type="number" name="stock" placeholder="Stock" min="0">
+    <button type="submit">Add Product</button>
+</form>
+
+</body>
+</html>
