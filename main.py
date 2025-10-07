@@ -44,6 +44,12 @@ login_manager.login_message_category = "warning"
 db.init_app(app)
 migrate = Migrate(app, db)
 
+@app.route('/init_db')
+def init_db():
+    db.create_all()
+    return "✅ Database tables created successfully!"
+
+
 @login_manager.user_loader
 def load_user(user_id):
         return db.get_or_404(User, int(user_id))
@@ -320,6 +326,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)
