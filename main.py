@@ -39,6 +39,8 @@ login_manager.login_view = "account"
 login_manager.login_message = "Please login to access this page."
 login_manager.login_message_category = "warning"
 
+
+
 db.init_app(app)
 migrate = Migrate(app, db)
 
@@ -316,5 +318,8 @@ def logout():
     return redirect(url_for('home'))
 
 
+
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
