@@ -127,6 +127,11 @@
                                     Add to Cart
                                 </button>
                             </form>
+                            {% if current_user.id == 1 %}
+                                <form action="{{ url_for('delete_product', id=product.id) }}" method="POST">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

@@ -44,10 +44,10 @@ login_manager.login_message_category = "warning"
 db.init_app(app)
 migrate = Migrate(app, db)
 
-@app.route('/init_db')
-def init_db():
-    db.create_all()
-    return "✅ Database tables created successfully!"
+# @app.route('/init_db')
+# def init_db():
+    # db.create_all()
+    # return "✅ Database tables created successfully!"
 
 
 @login_manager.user_loader
@@ -117,6 +117,15 @@ def add_product():
         return redirect(url_for("products"))
 
     return render_template("add_product.html")
+
+@app.route('/delete_product/<int:id>', methods=['POST'])
+@admin_only
+def delete_product(id):
+    product = Product.query.get_or_404(id)
+    db.session.delete(product)
+    db.session.commit()
+    return redirect(url_for('products'))
+
 
 @app.route("/dashboard")
 @login_required
