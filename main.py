@@ -63,10 +63,23 @@ def admin_only(func):
     return decorated_function
 
 def get_eth_price():
-    url = "https://api.coingecko.com/api/v3/simple/price"
-    params = {"ids": "ethereum", "vs_currencies": "usd"}
-    response = requests.get(url, params=params).json()
-    return response["ethereum"]["usd"]
+    try:
+        response = requests.get(
+            "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd",
+            timeout=10
+        )
+        data = response.json()
+
+        # Check if the expected key exists
+        if "ethereum" in data and "usd" in data["ethereum"]:
+            return data["ethereum"]["usd"]
+        else:
+            print("⚠️ Unexpected API response:", data)
+            return 0  # fallback to 0 if no valid price
+    except Exception as e:
+        print("Error fetching ETH price:", e)
+        return 0
+
 
 @app.route("/")
 def home():
