@@ -52,11 +52,12 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Home</a>
-            <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">About</a>
-            <a href="products.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Products</a>
-            <a href="my-account.html" class="block px-3 py-2 rounded-md text-base font-medium text-blue-600 bg-blue-50">My Account</a>
-            <button class="w-full mt-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Logout</button>
+            <a href="{{url_for('home')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Home</a>
+            <a href="{{url_for('view_cart')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Cart</a>
+            <a href="{{url_for('products')}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Products</a>
+            <a href="{{url_for('logout')}}">
+                <button class="w-full mt-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Logout</button>
+            </a>
         </div>
     </div>
 
@@ -85,17 +86,9 @@
                             <i data-feather="shopping-bag" class="w-5 h-5 mr-3"></i>
                             Orders
                         </a>
-                        <a href="#services" class="account-nav-item flex items-center px-4 py-3 rounded-md hover:bg-gray-50 transition">
-                            <i data-feather="settings" class="w-5 h-5 mr-3"></i>
-                            Services
-                        </a>
                         <a href="#payments" class="account-nav-item flex items-center px-4 py-3 rounded-md hover:bg-gray-50 transition">
                             <i data-feather="credit-card" class="w-5 h-5 mr-3"></i>
                             Payment Methods
-                        </a>
-                        <a href="#settings" class="account-nav-item flex items-center px-4 py-3 rounded-md hover:bg-gray-50 transition">
-                            <i data-feather="settings" class="w-5 h-5 mr-3"></i>
-                            Settings
                         </a>
                     </div>
                 </div>
@@ -160,32 +153,28 @@
                         </div>
                     </div>
 
-                    <!-- Vehicles Section -->
+                    <!-- payment Section -->
                     <div id="payment" class="bg-white rounded-lg shadow-sm p-6" data-aos="fade-up">
                         <h2 class="text-2xl font-bold mb-6">Payment</h2>
                         <div class="grid md:grid-cols-2 gap-6">
                             <div class="border rounded-lg p-4">
-                                <div class="flex items-center mb-4">
-                                    <img src="http://static.photos/automotive/120x80/201" alt="Model 3" class="w-16 h-12 object-cover mr-4">
-                                    <div>
-                                        <h3 class="font-semibold">Model 3</h3>
-                                        <p class="text-sm text-gray-600">VIN: 5YJ3E1EA4JF000123</p>
+                                {% for payment in payments %}
+                                    <div class="flex items-center mb-4">
+                                        <div>
+                                            <h3 class="font-semibold">Payment #TX000N0{{ payment.id }}</h3>
+                                            <p class="text-sm text-gray-600">${{ payment.amount }}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="space-y-2 text-sm">
-                                    <div class="flex justify-between">
-                                        <span>Range:</span>
-                                        <span class="font-medium">358 mi</span>
+                                    <div class="space-y-2 text-sm">
+                                        <div class="flex justify-between">
+                                            <span>{{ payment.status }}</span>
+                                        </div>
+                                    {% else %}
+                                        <div class="flex justify-between">
+                                            <span>No payment yet</span>
+                                        </div>
                                     </div>
-                                    <div class="flex justify-between">
-                                        <span>Software:</span>
-                                        <span class="font-medium">v11.1 (2023.44.1)</span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span>Last Service:</span>
-                                        <span class="font-medium">Oct 10, 2023</span>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
