@@ -280,8 +280,9 @@ def checkout():
     tax = round(subtotal * 0.07, 2)
     total_usd = subtotal + tax
 
-    eth_price = get_eth_price()
-    total_eth = round(total_usd / eth_price, 6)
+    eth_price = get_eth_price() or 0
+    total_eth = round(total_usd / eth_price, 6) if eth_price > 0 else 0
+    wallet_address = os.getenv("CRYPTO_WALLET_ADDRESS", "Wallet not set")
 
 
     if request.method == "POST":
@@ -305,7 +306,7 @@ def checkout():
         flash("Order placed successfully!", "success")
         return redirect(url_for("order_confirmation", order_id=order.id))
 
-    return render_template("checkout.html", subtotal=subtotal,  cart_items=cart_items, tax=tax, total_usd=total_usd, total_eth=total_eth)
+    return render_template("checkout.html", subtotal=subtotal,  cart_items=cart_items, tax=tax, total_usd=total_usd, total_eth=total_eth, wallet_address=wallet_address)
 
 @app.route("/order/<int:order_id>")
 @login_required
