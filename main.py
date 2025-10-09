@@ -66,24 +66,32 @@ def get_eth_price():
     try:
         response = requests.get(
             "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd",
-            timeout=10
+            timeout=20
         )
         data = response.json()
-
-        # Check if the expected key exists
-        if "ethereum" in data and "usd" in data["ethereum"]:
+        if "ethereum" in data:
             return data["ethereum"]["usd"]
-        else:
-            print("⚠️ Unexpected API response:", data)
-            return 0  # fallback to 0 if no valid price
     except Exception as e:
-        print("Error fetching ETH price:", e)
-        return 0
+        print("CoinGecko failed:", e)
+
+    # fallback to CryptoCompare
+    try:
+        response = requests.get("https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD", timeout=20)
+        data = response.json()
+        if "USD" in data:
+            return data["USD"]
+    except Exception as e:
+        print("CryptoCompare failed:", e)
+
+    # final fallback value
+    return 2500
+
 
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    all_products = Product.query.all()
+    return render_template("index.html", products=all_products)
 
 @app.route("/about")
 def about():
